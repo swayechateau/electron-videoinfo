@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Info (HTML)</title>
+</head>
+
+<body>
+    <h1>Video Info</h1>
+    <form id="videoForm">
+        <div>
+            <label for="videoPicker">Select a Video</label>
+            <input type="file" accept="video/*" name="videoFile" id="videoPicker">
+        </div>
+    </form>
+    <h1 id="result"></h1>
+    <video id="videoPlayer" src="" controls width="100%" height="300px"></video>
+    <script>
+        const { ipcRenderer, electron } = require('electron')
+
+        const videoForm = document.getElementById('videoForm')
+        const videoPicker = document.getElementById('videoPicker')
+        const videoPlayer = document.getElementById('videoPlayer')
+        const videoMeta = document.querySelector('#result')
+        videoPicker.addEventListener('change', event => {
+            //console.log(event)
+            event.preventDefault()
+            const { path } = videoPicker.files[0]
+            videoPlayer.src = path
+            ipcRenderer.send('video:submit', path)
+            // debugger
+        })
+        ipcRenderer.on('video:metadata', (event, duration) => {
+            videoMeta.innerHTML = `Video is ${duration} seconds`
+        })
+    </script>
+</body>
+
+</html>

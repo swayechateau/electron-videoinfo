@@ -1,0 +1,17 @@
+{
+    "name": "videoinfo",
+    "version": "1.0.0",
+    "description": "Udemy Electron Course",
+    "main": "index.ts",
+    "scripts": {
+        "start": "electron ."
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "fluent-ffmpeg": "^2.1.2"
+    },
+    "devDependencies": {
+        "electron": "^8.2.0"
+    }
+}
